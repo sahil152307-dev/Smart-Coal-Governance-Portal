@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Smart Coal Governance Portal | Ministry of Coal, Government of India</title>
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+<!-- ============ GOV UTILITY BAR ============ -->
+<div class="gov-utility" id="gov-utility">
+  <button id="skip-link">Skip to Main Content</button>
+  <span class="gu-sep">|</span>
+  <span>Text Size:</span>
+  <button id="fs-a" title="Smaller text">A-</button>
+  <button id="fs-b" title="Normal text">A</button>
+  <button id="fs-c" title="Larger text">A+</button>
+  <span class="gu-sep">|</span>
+  <button id="gov-lang">हिंदी</button>
+  <span class="gu-sep">|</span>
+  <button id="sr-access">Screen Reader Access</button>
+  <div class="gu-right"><span class="gu-count" id="last-updated"></span></div>
+</div>
+
+<!-- ============ GOV HEADER ============ -->
+<header class="gov-header">
+  <svg class="gh-emblem" viewBox="0 0 64 64" aria-hidden="true">
+    <g stroke="#1b4f8a" fill="none" stroke-width="1.6">
+      <circle cx="32" cy="32" r="29" stroke-width="2.2"/>
+      <circle cx="32" cy="32" r="4" fill="#1b4f8a" stroke="none"/>
+      <g id="spokes"></g>
+    </g>
+  </svg>
+  <div class="gh-gov">
+    <div class="l1">भारत सरकार | Government of India</div>
+    <div class="l2">Ministry of Coal | कोयला मंत्रालय</div>
+  </div>
+  <div class="gh-div"></div>
+  <div class="gh-title">
+    <div class="t1">Smart Coal Governance Portal</div>
+    <div class="t2">कोयला शासन प्रणाली — Mine Compliance, Attendance &amp; Safety Intelligence</div>
+  </div>
+  <div class="gh-badge">DEMO BUILD</div>
+</header>
+<div class="tricolor"></div>
+
+<!-- ============ WELCOME ============ -->
+<div id="welcome" class="screen">
+  <div class="welcome-inner">
+    <h1>Smart Coal <span>Governance</span> Portal</h1>
+    <p class="w-sub-hi">खान अनुपालन, उपस्थिति एवं सुरक्षा निगरानी प्रणाली</p>
+    <p class="tagline" data-i18n="tagline">Offline-first mine compliance and AI anomaly detection platform for coal mining operations</p>
+    <div class="feature-strip">
+      <span>QR &amp; Face Attendance</span><span>Geo-tagged Inspections</span><span>Offline-First Sync</span>
+      <span>AI Anomaly Engine</span><span>Hindi &amp; English</span><span>Regulator Reports</span>
+    </div>
+    <div class="role-grid">
+      <button class="role-card" data-role="officer">
+        <div class="rc-ico" data-icon="user"></div>
+        <h3 data-i18n="roleOfficer">Field Officer Application</h3>
+        <p data-i18n="roleOfficerSub">Attendance scanning, geo-tagged inspections, offline queue and sync</p>
+        <code>officer@coal.gov.in · demo123</code>
+      </button>
+      <button class="role-card" data-role="supervisor">
+        <div class="rc-ico" data-icon="monitor"></div>
+        <h3 data-i18n="roleSupervisor">Supervisor Portal</h3>
+        <p data-i18n="roleSupervisorSub">Live analytics, AI anomalies, records and regulator reports</p>
+        <code>supervisor@coal.gov.in · demo123</code>
+      </button>
+    </div>
+    <p class="welcome-note">Demonstration prototype — all data is simulated locally in the browser. No data leaves this device.</p>
+  </div>
+</div>
+
+<!-- ============ LOGIN ============ -->
+<div id="login" class="screen hidden">
+  <div class="login-card">
+    <button class="lc-back" id="login-back"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 12H4m0 0 6-6m-6 6 6 6"/></svg> <span data-i18n="back">Back</span></button>
+    <h2 id="login-title">Sign In</h2>
+    <p class="lc-sub" id="login-sub"></p>
+    <label data-i18n="email">Email</label>
+    <input id="login-email" type="email" autocomplete="off">
+    <label data-i18n="password">Password</label>
+    <input id="login-pass" type="password" autocomplete="off">
+    <p class="err" id="login-err"></p>
+    <button id="login-btn" class="btn-primary" data-i18n="signIn">Sign In</button>
+    <p class="lc-hint" data-i18n="demoHint">Demo credentials prefilled — just press Sign In</p>
+  </div>
+</div>
+
+<!-- ============ OFFICER APP ============ -->
+<div id="officer" class="hidden">
+  <header class="off-header">
+    <div class="off-brand">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#1b4f8a" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/></svg>
+      SCG <span class="role-pill" data-i18n="officer">OFFICER</span>
+    </div>
+    <div class="off-actions">
+      <button class="pill" id="off-offline"><span class="dot"></span><span id="off-offline-txt">Online</span></button>
+      <button class="icon-btn" id="off-signout"><span data-icon="logout"></span><span data-i18n="signOut">Sign Out</span></button>
+    </div>
+  </header>
+  <main id="officer-root"></main>
+  <nav class="off-nav">
+    <button data-view="home" class="active"><span class="ni" data-icon="home"></span><span data-i18n="navHome">Home</span></button>
+    <button data-view="scan"><span class="ni" data-icon="qr"></span><span data-i18n="navScan">Scan</span></button>
+    <button data-view="inspect"><span class="ni" data-icon="camera"></span><span data-i18n="navInspect">Inspect</span></button>
+    <button data-view="alerts"><span class="ni" data-icon="bell"></span><span data-i18n="navAlerts">Alerts</span></button>
+  </nav>
+</div>
+
+<!-- ============ SUPERVISOR PORTAL ============ -->
+<div id="supervisor" class="hidden">
+  <aside id="sidebar">
+    <div class="side-brand">
+      <div class="sb-badge"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b4f8a" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="2"/><path d="M12 2v20M2 12h20M4.9 4.9l14.2 14.2M19.1 4.9 4.9 19.1"/></svg></div>
+      <div><b>SCG Portal</b><small>SUPERVISOR</small></div>
+    </div>
+    <nav class="side-nav">
+      <button data-page="overview" class="active"><span class="ni" data-icon="grid"></span><span data-i18n="pgOverview">Overview</span></button>
+      <button data-page="analytics"><span class="ni" data-icon="trend"></span><span data-i18n="pgAnalytics">Analytics</span></button>
+      <button data-page="records"><span class="ni" data-icon="folder"></span><span data-i18n="pgRecords">Records</span></button>
+      <button data-page="ai"><span class="ni" data-icon="cpu"></span><span data-i18n="pgAI">AI Anomalies</span></button>
+      <button data-page="reports"><span class="ni" data-icon="file"></span><span data-i18n="pgReports">Reports</span></button>
+      <div class="nav-sep">Session</div>
+      <div class="side-user">
+        <div class="avatar">AS</div>
+        <div>
+          <div class="su-name">Anil Sharma</div>
+          <div class="su-role" data-i18n="mineSupervisor">Mine Supervisor</div>
+        </div>
+      </div>
+      <button id="sup-signout"><span data-icon="logout"></span><span data-i18n="signOut">Sign Out</span></button>
+    </nav>
+  </aside>
+  <div id="side-overlay"></div>
+  <main class="sup-main">
+    <header class="topbar">
+      <button id="hamburger" aria-label="Menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#1b4f8a" stroke-width="2.2"><path d="M4 6h16M4 12h16M4 18h16"/></svg></button>
+      <h1 id="page-title">Overview</h1>
+      <span class="crumb" id="crumb">Home › Overview</span>
+      <div class="topbar-right">
+        <span class="pill hide-m" id="sup-sync-pill"><span class="dot"></span><span id="sup-sync-txt">Synced</span></span>
+        <button class="icon-btn" id="sup-signout-top" title="Sign Out"><span data-icon="logout"></span></button>
+      </div>
+    </header>
+    <section id="page-root"></section>
+  </main>
+</div>
+
+<!-- ============ GOV FOOTER ============ -->
+<footer class="gov-footer" id="gov-footer">
+  <div class="flinks">
+    <div class="fcol">
+      <h4>About the Portal</h4>
+      <button data-flink>Smart Coal Governance is a demonstration prototype for offline-first mine compliance monitoring, worker attendance verification and AI-assisted safety intelligence.</button>
+    </div>
+    <div class="fcol">
+      <h4>Quick Links</h4>
+      <button data-flink>Welcome Page</button>
+      <button data-flink>Officer Application</button>
+      <button data-flink>Supervisor Portal</button>
+      <button data-flink>Regulator Reports</button>
+    </div>
+    <div class="fcol">
+      <h4>Information</h4>
+      <button data-flink>Help &amp; FAQ</button>
+      <button data-flink>Contact Us</button>
+      <button data-flink>Privacy Policy</button>
+      <button data-flink>Terms of Use</button>
+      <button data-flink>Sitemap</button>
+    </div>
+    <div class="fcol">
+      <h4>Related Sites</h4>
+      <button data-flink>Ministry of Coal</button>
+      <button data-flink>Coal India Limited</button>
+      <button data-flink>DGMS</button>
+      <button data-flink>CMPDI</button>
+    </div>
+  </div>
+  <div class="fbottom">
+    <span>Website content managed by Ministry of Coal, Government of India (demo)</span>
+    <span>Visitor Count: <span class="vc" id="visit-count">0</span></span>
+    <span>Last Updated: <span id="last-updated-2">19 Nov 2026</span></span>
+    <span>© <span id="footer-year">2026</span> — Demo prototype for evaluation</span>
+  </div>
+</footer>
+
+<div id="toast-root"></div>
+
+
+
+
+
+
+
+
+
+
+  <script src="js/app.js"></script>
+</body>
+</html>
